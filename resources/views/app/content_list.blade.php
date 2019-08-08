@@ -3,11 +3,11 @@
 	@forelse ($content as $list)
 		<div class="card fullscreen">
 	      <div class="card-image">
-	        <a href="{{ url('content/'.$list->slug) }}"><img src="{{ Voyager::image($list->image) }}" alt=""></a>
+	        <a href="{{ url('content/'.$list->slug) }}" target="_self"><img src="{{ Voyager::image($list->image) }}" alt=""></a>
 	      </div>
 	      <div class="card-feedback">
 	        <div class="card-users">
-	          <i class="ion-ios-heart accent-text"></i> <span>85</span>
+	          <i class="ion-ios-heart accent-text"></i> <span>{{ countEmot($list->id) }}</span>
 	          <i class="ion-chatbubble-working"></i> <span>5</span>
 	        </div>
 	        {{-- <div class="card-share">

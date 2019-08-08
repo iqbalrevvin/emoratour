@@ -39,16 +39,16 @@
     </div>
     <!-- Share -->
     <div class="p-20 center-align">
-      <h5>Emotic Pengunjung {{ Request::ip() }}</h5>
-      <a href="#" class="emot" data-emot="emot_senyum" data-post="{{ $content->id }}" style="font-size:26px">&#128522;</a>
+      <h5>Emotic Pengunjung {{-- {{ Request::ip() }} --}}</h5>
+      <a href="javascript:;" class="emot" data-emot="emot_senyum" data-post="{{ $content->id }}" style="font-size:26px">&#128522;</a>
       ({{ $emot_senyum }})
-      <a href="#" class="emot" data-emot="emot_love" data-post="{{ $content->id }}" style="font-size:26px">&#128536;</a>
+      <a href="javascript:;" class="emot" data-emot="emot_love" data-post="{{ $content->id }}" style="font-size:26px">&#128536;</a>
       ({{ $emot_love}})
-      <a href="#" class="emot" data-emot="emot_bete" data-post="{{ $content->id }}" style="font-size:26px">&#128530;</a>
+      <a href="javascript:;" class="emot" data-emot="emot_bete" data-post="{{ $content->id }}" style="font-size:26px">&#128530;</a>
       ({{ $emot_bete}})
-      <a href="#" class="emot" data-emot="emot_wow" data-post="{{ $content->id }}" style="font-size:26px">&#128562;</a>
+      <a href="javascript:;" class="emot" data-emot="emot_wow" data-post="{{ $content->id }}" style="font-size:26px">&#128562;</a>
       ({{ $emot_wow}})
-      <a href="#" class="emot" data-emot="emot_marah" data-post="{{ $content->id }}" style="font-size:26px">&#128545;</a>
+      <a href="javascript:;" class="emot" data-emot="emot_marah" data-post="{{ $content->id }}" style="font-size:26px">&#128545;</a>
       ({{ $emot_marah}})
     </div>
     <div class="progress" style="display:none ;">

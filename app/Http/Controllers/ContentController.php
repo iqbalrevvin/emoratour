@@ -53,7 +53,7 @@ class ContentController extends Controller
     public function list()
     {
     	$content = DB::table('posts')
-    				->select('posts.*', 'users.name as username', 'users.avatar', 'categories.name as catename')
+    				->select('posts.*', 'posts.id as postid', 'users.name as username', 'users.avatar', 'categories.name as catename')
     				->join('users', 'posts.author_id', '=', 'users.id')
     				->join('categories', 'posts.category_id', '=', 'categories.id')
     				->where('status', 'PUBLISHED')
@@ -61,7 +61,7 @@ class ContentController extends Controller
     				//->limit()
     				->get();
     	return view('app.content_list', [
-    		'content' => $content
+    		'content' => $content,
     	]);
     }
 
