@@ -34,8 +34,8 @@
                 <span class="white-text">{{ $list->username }}</span>
               </div>
               <div class="animated fadeinup delay-2">
-                <a href="{{ url('content/'.$list->slug) }}">
-                <h2 class="title white-text">{{ $list->title }}</h2>
+                <a href="{{ url('content/'.$list->slug) }}" target="_self">
+                  <h2 class="title white-text">{{ $list->title }}</h2>
                 </a>
                 <p class="white-text m-0">{{ $list->excerpt }}</p>
                 <span class="event-category small white-text">{{ $list->catename }}</span>
