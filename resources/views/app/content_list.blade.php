@@ -7,7 +7,7 @@
 	      </div>
 	      <div class="card-feedback">
 	        <div class="card-users">
-	          <i class="ion-ios-heart accent-text"></i> <span>{{-- {{ $list->countEmot($list->id) }} --}}</span>
+	          <i class="ion-ios-heart accent-text"></i> <span>{{ countEmot($list->id) }}</span>
 	          <i class="ion-chatbubble-working"></i> <span>5</span>
 	        </div>
 	        {{-- <div class="card-share">
