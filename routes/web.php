@@ -18,6 +18,8 @@
 Route::get('/', 'HomeController@index')->name('home.index');
 Route::get('/content/{slug}', 'ContentController@index')->name('content.index');
 Route::get('/list-content', 'ContentController@list')->name('content.list');
+Route::get('/postemot', 'ContentController@postemot')->name('content.postemot');
+
 
 Route::group(['prefix' => 'admin'], function() {
     Voyager::routes();

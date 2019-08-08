@@ -19,7 +19,7 @@
     </div>
     <div class="card-feedback">
       <div class="card-users">
-        <i class="ion-ios-heart accent-text"></i> <span>82</span>
+        <i class="ion-ios-heart accent-text"></i> <span>{{ $all_emot }}</span>
         <i class="ion-chatbubble-working"></i> <span>5</span>
       </div>
     </div>
@@ -39,13 +39,22 @@
     </div>
     <!-- Share -->
     <div class="p-20 center-align">
-      <h5>Emotic Pengunjung</h5>
-      <span class="emot" data-name="emot_senyum" style="font-size:30px">&#128522;</span>(15)
-      <span style="font-size:30px">&#128536;</span>(19)
-      <span style="font-size:30px">&#128530;</span>(17)
-      <span style="font-size:30px">&#128562;</span>(19)
-      <span style="font-size:30px">&#128545;</span>(12)
+      <h5>Emotic Pengunjung {{ Request::ip() }}</h5>
+      <a href="#" class="emot" data-emot="emot_senyum" data-post="{{ $content->id }}" style="font-size:26px">&#128522;</a>
+      ({{ $emot_senyum }})
+      <a href="#" class="emot" data-emot="emot_love" data-post="{{ $content->id }}" style="font-size:26px">&#128536;</a>
+      ({{ $emot_love}})
+      <a href="#" class="emot" data-emot="emot_bete" data-post="{{ $content->id }}" style="font-size:26px">&#128530;</a>
+      ({{ $emot_bete}})
+      <a href="#" class="emot" data-emot="emot_wow" data-post="{{ $content->id }}" style="font-size:26px">&#128562;</a>
+      ({{ $emot_wow}})
+      <a href="#" class="emot" data-emot="emot_marah" data-post="{{ $content->id }}" style="font-size:26px">&#128545;</a>
+      ({{ $emot_marah}})
     </div>
+    <div class="progress" style="display:none ;">
+     <div class="indeterminate"></div>
+    </div>
+    <div class="sendingEmot" style="display:none ;">Mengirim Emot. . .</div>
     <!-- Comments -->
     <div class="comments grey lighten-4">
       <h5>5 Ulasan</h5>
@@ -93,9 +102,29 @@
 
 @section('custom_script')
 	<script>
-        $(".emot").click(function(){
-        	var name = $(this).data('name');
-          alert(name);
+        // $(".emot").click(function(e){
+        $(document).on('click', '.emot', function(e) {
+            e.preventDefault(e);
+        	var emot = $(this).data('emot');
+          var post = $(this).data('post');
+          // alert(post);
+          $(".progress").show();
+          $(".sendingEmot").show();
+          $.ajax({
+              type: "GET",
+              url: '{{ route('content.postemot') }}',
+              async: true,
+              data: {
+                  emot      : emot,
+                  post      : post,
+              },
+              success: function(response){
+                  location.reload();
+              },
+              error: function (xhr, ajaxOptions, thrownError) { // Ketika terjadi error
+                alert(xhr.responseText) // munculkan alert
+              }
+          });
         });
     </script>
 @endsection

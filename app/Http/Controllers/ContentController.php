@@ -15,8 +15,38 @@ class ContentController extends Controller
     				->where('posts.slug', $slug)
     				->orderBy('posts.created_at', 'desc')
     				->first();
+    	$allEmot 	=	DB::table('emot_posts')
+    					->where('post_id', $content->id)
+    					->count();
+    	$emotSenyum = DB::table('emot_posts')
+    					->where('post_id', $content->id)
+    					->where('emoticon', 'emot_senyum')
+    					->count();
+    	$emotLove = DB::table('emot_posts')
+    					->where('post_id', $content->id)
+    					->where('emoticon', 'emot_love')
+    					->count();
+    	$emotBete = DB::table('emot_posts')
+    					->where('post_id', $content->id)
+    					->where('emoticon', 'emot_bete')
+    					->count();
+    	$emotWow = DB::table('emot_posts')
+    					->where('post_id', $content->id)
+    					->where('emoticon', 'emot_wow')
+    					->count();
+    	$emotMarah = DB::table('emot_posts')
+    					->where('post_id', $content->id)
+    					->where('emoticon', 'emot_marah')
+    					->count();
+
     	return view('app.content', [
-    		'content' => $content
+    		'content' => $content,
+    		'all_emot' => $allEmot,
+    		'emot_senyum' => $emotSenyum,
+    		'emot_love' => $emotLove,
+    		'emot_bete' => $emotBete,
+    		'emot_wow' => $emotWow,
+    		'emot_marah' => $emotMarah,
     	]);
     }
 
@@ -33,5 +63,21 @@ class ContentController extends Controller
     	return view('app.content_list', [
     		'content' => $content
     	]);
+    }
+
+    public function postemot(Request $request)
+    {
+    	$idPost 	= $request->input('post');
+    	$emot 		= $request->input('emot');
+    	$ip 		= $request->ip();
+    	$input 		= DB::table('emot_posts')
+    					->insert(
+    						[
+    							'post_id' 		=> $idPost,
+    							'emoticon' 		=> $emot,
+    							'ip_address' 	=> $ip
+    						]
+    					);
+    	
     }
 }
