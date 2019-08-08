@@ -6,13 +6,13 @@
         
         <div class="fixed-action-btn floating-button animated bouncein delay-3 horizontal click-to-toggle">
           <a href="javascript:;" class="btn-floating btn-large accent-color">
-            <i class="ion-android-share-alt"></i>
+            <i class="ion-android-map"></i>
           </a>
-          <ul>
+          {{-- <ul>
             <li><a class="btn-floating blue darken-4"><i class="ion-social-facebook"></i></a></li>
             <li><a class="btn-floating light-blue"><i class="ion-social-twitter"></i></a></li>
             <li><a class="btn-floating pink"><i class="ion-social-instagram"></i></a></li>
-          </ul>
+          </ul> --}}
         </div>
         <div class="banner-title">{{ $content->title }}</div>
       </div>
