@@ -20,7 +20,7 @@
     <div class="card-feedback">
       <div class="card-users">
         <i class="ion-ios-heart accent-text"></i> <span>{{ $all_emot }}</span>
-        <i class="ion-chatbubble-working"></i> <span>5</span>
+        <i class="ion-chatbubble-working"></i> <span>{{ count($list_review) }}</span>
       </div>
     </div>
     <!-- Article Content -->
@@ -56,51 +56,72 @@
     </div>
     <div class="sendingEmot" style="display:none ;">Mengirim Emot. . .</div>
     <!-- Comments -->
+    @if (session('send_ulasan'))
+      <div class="msg msg-success z-depth-2 scale-transition valign center"> 
+        {{ session('send_ulasan') }}
+      </div>
+    @endif
     <div class="comments grey lighten-4">
-      <h5>5 Ulasan</h5>
-      <div class="media-top-object animated fadeinright delay-2">
-        <img src="{{ asset('/frontsite/img/user.png') }}" alt="" class="avatar">
-        <div class="media-body">
-          <span>Luke Noel</span>
-          <span class="small">Budugul bali sangat indah</span>
+      <h5>{{ count($list_review) }} Ulasan</h5>
+      @forelse ($list_review as $review)
+        <div class="media-top-object animated fadeinright delay-2">
+          <img src="{{ asset('/frontsite/img/user.png') }}" alt="" class="avatar">
+          <div class="media-body">
+            <span>{{ $review->nama }}</span>
+            <span class="small">{{ $review->ulasan }}</span>
+          </div>
         </div>
-      </div>
+      @empty
+        <div class="media-top-object animated fadeinright delay-2">
+          <div class="media-body">
+            <span>-</span>
+            {{-- <span class="small">Budugul bali sangat indah</span> --}}
+          </div>
+        </div>
+      @endforelse
+    </div>
 
-      <div class="media-top-object animated fadeinright delay-3">
-        <img src="{{ asset('/frontsite/img/user.png') }}" alt="" class="media-left avatar">
-        <div class="media-body">
-          <span>Rifki</span>
-          <span class="small">Keren tempatnya</span>
+    
+@endsection
+@section('modal')
+  <div class="fixed-action-btn">
+      <a class="btn-floating btn-large waves-effect waves-light accent-color modal-trigger" href="#modal1"><i class="ion-android-add"></i></a>
+    </div>
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal bottom-sheet features">
+      <div class="modal-content">
+        <!-- Form Inputs --> 
+        <div class="form-inputs p-10" {{-- action="{{ route('content.sendreview') }}" id="formUlasan" method="POST" --}}>
+          @csrf
+          <div class="progress" id="progress_ulasan" style="display:none;">
+            <div class="indeterminate"></div>
+          </div>
+          <p class="remember animated bouncein delay-6">
+            <label for="test5"><b><u>Kirim Ulasan</u></b></label>
+          </p>
+          <input type="hidden" name="post_id" id="post_id" value="{{ $content->id }}">
+          <input type="hidden" name="slug" value="{{ $content->slug }}">
+          <div>
+            <div class="input-field animated fadeinright">
+              <input name="nama" id="nama" type="text" class="validate" required autocomplete="off">
+              <label for="nama">Nama</label>
+            </div>
+          </div>
+          <div class="input-field animated fadeinright delay-5">
+            <textarea class="materialize-textarea" name="ulasan" id="ulasan" required></textarea> 
+            <label for="textarea1">Tulis Ulasan Anda</label>
+          </div>
+          
+          <button class="btn-small waves-effect waves-light btn-large primary-color block animated bouncein delay-6" id="btn_ulasan">
+                Kirim
+            </button>
         </div>
-      </div>
-
-      <div class="media-top-object animated fadeinright delay-4">
-        <img src="{{ asset('/frontsite/img/user.png') }}" alt="" class="media-left avatar">
-        <div class="media-body">
-          <span>Joel</span>
-          <span class="small">Pengen kesini lagi</span>
-        </div>
-      </div>
-
-      <div class="media-top-object animated fadeinright delay-5">
-        <img src="{{ asset('/frontsite/img/user.png') }}" alt="" class="media-left avatar">
-        <div class="media-body">
-          <span>Mike</span>
-          <span class="small">Terdapat kenangan indah disini</span>
-        </div>
-      </div>
-
-      <div class="media-top-object animated fadeinright delay-6">
-        <img src="{{ asset('/frontsite/img/user.png') }}" alt="" class="media-left avatar">
-        <div class="media-body">
-          <span>Robb Swan</span>
-          <span class="small">Love your works! Asalways!</span>
-        </div>
+        <!-- End of Form -->
       </div>
     </div>
 @endsection
-
 @section('custom_script')
+
 	<script>
         // $(".emot").click(function(e){
         $(document).on('click', '.emot', function(e) {
@@ -126,5 +147,32 @@
               }
           });
         });
+
+        $(document).on('click', '#btn_ulasan', function(){
+          if($('#nama').val()!="" || $('#ulasan').val()!=""){
+            $("#progress_ulasan").show();
+            // var post_ulasan = $('#formUlasan').serialize();
+            var post_id   = $('#post_id').val();
+            var nama      = $('#nama').val();
+            var ulasan    = $('#ulasan').val();
+            $.ajax({
+              type: "GET",
+              url: '{{ route('content.sendreview') }}',
+              async: true,
+              data: {
+                  post_id       : post_id,
+                  nama          : nama,
+                  ulasan        : ulasan
+              },
+              success: function(response){
+                  location.reload();
+              },
+              error: function (xhr, ajaxOptions, thrownError) { // Ketika terjadi error
+                alert(xhr.responseText) // munculkan alert
+              }
+            });
+          }
+        });
+
     </script>
 @endsection
