@@ -1,15 +1,8 @@
 <?php 
-	function countEmot($post_id){
+	function countEmot($idpost){
 		$countEmot = DB::table('emot_posts')
-						->where('post_id', $post_id)
+						->where('post_id', $idpost)
 						->count();
 		return $countEmot;
-    }
-    
-    function countReview($post_id){
-        $count = DB::table('ulasan')
-                    ->where('post_id', $post_id)
-                    ->count();
-        return $count;
-    }
+	}
  ?>

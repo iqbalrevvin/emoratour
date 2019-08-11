@@ -114,7 +114,7 @@
                 </li>
               </ul>
             </div> --}}
-            {{-- <div class="preloader fixed-action-btn animated bouncein delay-3 horizontal click-to-toggle" style="display: none">
+            <div class="preloader fixed-action-btn animated bouncein delay-3 horizontal click-to-toggle" style="display: none">
             <div class=" preloader-wrapper animated bouncein small active" >
                 <div class="spinner-layer spinner-yellow-only">
                   <div class="circle-clipper left">
@@ -127,12 +127,11 @@
                 </div>
               </div>
             </div>
-            </div> --}}
+            </div>
           
             <!-- Footer -->
             @include('app.partials.footer')
         </div>
-        @yield('modal')
         <!-- Left Sidebar -->
         @include('app.partials.sidebar')
         <!-- End of Sidebars -->

@@ -14,12 +14,7 @@ class ContentController extends Controller
     				->join('categories', 'posts.category_id', '=', 'categories.id')
     				->where('posts.slug', $slug)
     				->orderBy('posts.created_at', 'desc')
-                    ->first();
-
-        $listReview = DB::table('ulasan')
-                        ->where('post_id', $content->id)
-                        ->get();
-
+    				->first();
     	$allEmot 	=	DB::table('emot_posts')
     					->where('post_id', $content->id)
     					->count();
@@ -51,8 +46,7 @@ class ContentController extends Controller
     		'emot_love' => $emotLove,
     		'emot_bete' => $emotBete,
     		'emot_wow' => $emotWow,
-            'emot_marah' => $emotMarah,
-            'list_review' => $listReview
+    		'emot_marah' => $emotMarah,
     	]);
     }
 
@@ -84,24 +78,6 @@ class ContentController extends Controller
     							'ip_address' 	=> $ip
     						]
     					);
-    }
-
-    public function sendreview(Request $request)
-    {
-        $slug           = $request->input('slug');
-        $post_id        = $request->input('post_id');
-        $nama           = $request->input('nama');
-        $ulasan         = $request->input('ulasan');
-        $ip_address     = $request->ip(); 
-
-        $insert         = DB::table('ulasan')
-                            ->insert([
-                                'post_id'       => $post_id,
-                                'nama'          => $nama,
-                                'ulasan'        => $ulasan,
-                                'ip_address'    => $ip_address
-                            ]);
-        // return redirect('content/'.$slug)->with('send_ulasan', 'Terimakasih, ulasan anda berhasil terkirim');
-        // return $insert;
+    	
     }
 }
