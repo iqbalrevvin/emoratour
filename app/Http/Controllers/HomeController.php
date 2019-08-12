@@ -13,10 +13,11 @@ class HomeController extends Controller
     {
         $agent      = new Agent();
         $platform   = $agent->platform();
+        $version    = $agent->version($platform);
         $ip 		= $request->ip();
         $visitor = Visitor::Create([
             'ip_address'    => $ip,
-            'perangkat'     => $platform,
+            'perangkat'     => $platform.' '.$version,
             'deskripsi'     => 'Pengunjung dari IP '.$ip,
         ]);
 
