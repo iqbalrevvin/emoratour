@@ -12,7 +12,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $agent      = new Agent();
-        $platform   = $agent->device();
+        $platform   = $agent->platform();
         $ip 		= $request->ip();
         $visitor = Visitor::Create([
             'ip_address'    => $ip,
