@@ -174,7 +174,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Unicodeveloper\Emoji\EmojiServiceProvider::class
+        Unicodeveloper\Emoji\EmojiServiceProvider::class,
+        Jenssegers\Agent\AgentServiceProvider::class,
 
     ],
 
@@ -227,6 +228,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Emoji' => Unicodeveloper\Emoji\Facades\Emoji::class,
+        'Agent' => Jenssegers\Agent\Facades\Agent::class,
     ],
 
 ];

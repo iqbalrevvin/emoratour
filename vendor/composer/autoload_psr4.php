@@ -56,6 +56,8 @@ return array(
     'Larapack\\Hooks\\' => array($vendorDir . '/larapack/hooks/src'),
     'Larapack\\DoctrineSupport\\' => array($vendorDir . '/larapack/doctrine-support/src'),
     'JsonSchema\\' => array($vendorDir . '/justinrainbow/json-schema/src/JsonSchema'),
+    'Jenssegers\\Agent\\' => array($vendorDir . '/jenssegers/agent/src'),
+    'Jaybizzle\\CrawlerDetect\\' => array($vendorDir . '/jaybizzle/crawler-detect/src'),
     'JakubOnderka\\PhpConsoleHighlighter\\' => array($vendorDir . '/jakub-onderka/php-console-highlighter/src'),
     'JakubOnderka\\PhpConsoleColor\\' => array($vendorDir . '/jakub-onderka/php-console-color/src'),
     'Intervention\\Image\\' => array($vendorDir . '/intervention/image/src/Intervention/Image'),
